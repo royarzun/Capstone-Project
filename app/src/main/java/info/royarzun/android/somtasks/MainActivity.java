@@ -5,7 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,24 +18,20 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int RC_SIGN_IN = 1;
+    public static final int RC_SIGN_IN = 200;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    @BindView(R.id.user_profile) TextView mUserProfileTV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         // Initialize Firebase components
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        // Initialize references to views
-        // mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        // Initialize progress bar
-        // mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -40,19 +40,32 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Toast.makeText(MainActivity.this,
-                            "You're now signed in. Welcome to SomTasks",
+                            "You're now signed in. Welcome back " + user.getEmail().toString(),
                             Toast.LENGTH_SHORT).show();
                 } else {
                     // User is signed out
+                    Toast.makeText(MainActivity.this,
+                            "You need to sign in. Welcome to SomTasks",
+                            Toast.LENGTH_SHORT).show();
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setProviders(AuthUI.EMAIL_PROVIDER, AuthUI.GOOGLE_PROVIDER)
+                                    .setTheme(R.style.FirebaseLoginTheme)
                                     .build(),
                             RC_SIGN_IN);
                 }
             }
         };
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        try{
+            mUserProfileTV.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        } catch (NullPointerException e) {
+            mUserProfileTV.setText("N/A");
+        }
+
+
     }
 
     @Override
@@ -71,11 +84,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_main_action_logout:
+                FirebaseAuth.getInstance().signOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/white"/>
+    <item
+        android:bottom="16dp"
+        android:start="16dp">
+        <bitmap
+            android:src="@mipmap/logo_canasto_main"
+            android:gravity="bottom|left" />
+    </item>
+
+</layer-list>
