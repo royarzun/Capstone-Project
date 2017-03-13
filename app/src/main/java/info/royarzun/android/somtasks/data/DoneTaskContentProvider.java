@@ -7,12 +7,12 @@ import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
 
-@ContentProvider(authority = DoneTaskContentProvider.AUTHORITY, database = DoneTaskDatabase.class)
+@ContentProvider(authority = DoneTaskContentProvider.AUTHORITY, database = SomDatabase.class)
 public final class DoneTaskContentProvider {
 
     public static final String AUTHORITY = "info.royarzun.android.somtasks.data.DoneTaskContentProvider";
 
-    @TableEndpoint(table = DoneTaskDatabase.DONE_TASKS)
+    @TableEndpoint(table = SomDatabase.DONE_TASKS)
     public static class DoneTasks {
 
         @ContentUri(
