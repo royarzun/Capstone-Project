@@ -17,6 +17,6 @@ public final class SomDatabase {
         public static final String PENDING_TASKS = "pending_tasks";
 
         @Table(ActionFieldColumns.class)
-        public static final String TASK_ACTOINS = "task_actions";
+        public static final String TASK_ACTIONS = "task_actions";
     }
 }
