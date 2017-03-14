@@ -12,6 +12,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import com.facebook.stetho.Stetho;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
+
         // Initialize Firebase components
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -101,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             mUserProfileTV.setText("N/A");
         }
-
-
     }
 
     @Override
