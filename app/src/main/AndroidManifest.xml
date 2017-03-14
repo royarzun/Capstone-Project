@@ -25,6 +25,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".data.generated.TasksContentProvider"
+            android:authorities="info.royarzun.android.somtasks.data.TasksContentProvider"
+            android:exported="false" />
+
+        <receiver android:name=".widget.SomTasksWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/som_tasks_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
