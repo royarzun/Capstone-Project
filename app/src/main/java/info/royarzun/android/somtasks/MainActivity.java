@@ -72,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                             Task newTask = dataSnapshot.getValue(Task.class);
-                            Log.d("BLA", newTask.forms.get(0).toMap().toString());
-                            data.add(new FormItem(newTask.label,
+                            data.add(new FormItem(newTask.id, newTask.label,
                                     newTask.forms.get(0).options,
                                     Utils.createInterpolator(Utils.FAST_OUT_LINEAR_IN_INTERPOLATOR)));
                             mRecyclerView.setAdapter(new FormListAdapter(data));
@@ -112,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         try{
-            mUserProfileTV.setText(getResources().getText(R.string.welcome_session) + " " + mFirebaseAuth.getCurrentUser().getEmail());
+            mUserProfileTV.setText(getResources().getText(R.string.welcome_session) +
+                    " " + mFirebaseAuth.getCurrentUser().getEmail() + ", "+ getResources().getText(R.string.todo_tasks_title) );
         } catch (NullPointerException e) {
             mUserProfileTV.setText("N/A");
         }

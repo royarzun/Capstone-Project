@@ -1,13 +1,16 @@
 package info.royarzun.android.somtasks;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -43,8 +46,8 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final FormItem item = data.get(position);
-        holder.setIsRecyclable(false);
 
+        holder.setIsRecyclable(false);
         holder.textView.setText(item.description);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.context, R.layout.options_spinner_item, item.options);
         holder.spinnerOptions.setAdapter(adapter);
@@ -79,6 +82,29 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
                 onClickButton(holder.expandableLayout);
             }
         });
+        // Clear button
+        holder.clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.editText.setText("");
+            }
+        });
+
+        final Context context = this.context;
+        final Activity activity = (Activity) this.context;
+
+        holder.submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String actionTaken = item.options.get(holder.spinnerOptions.getSelectedItemPosition());
+
+                Intent mServiceIntent = new Intent(context, TaskWritterIntentService.class);
+                mServiceIntent.putExtra(TaskWritterIntentService.EXTRA_TASK_ID, item.taskId);
+                mServiceIntent.putExtra(TaskWritterIntentService.EXTRA_ACTION, actionTaken);
+                mServiceIntent.putExtra(TaskWritterIntentService.EXTRA_FEEDBACK, holder.editText.getText().toString());
+                activity.startService(mServiceIntent);
+            }
+        });
     }
 
     private void onClickButton(final ExpandableLayout expandableLayout) {
@@ -96,6 +122,9 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
         public Spinner spinnerOptions;
         public EditText editText;
 
+        public Button clearButton;
+        public Button submitButton;
+
         public ExpandableLinearLayout expandableLayout;
 
         public ViewHolder(View v) {
@@ -105,6 +134,9 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             buttonLayout = (RelativeLayout) v.findViewById(R.id.button);
             expandableLayout = (ExpandableLinearLayout) v.findViewById(R.id.expandableLayout);
             spinnerOptions = (Spinner) v.findViewById(R.id.spinner_options);
+
+            clearButton = (Button) v.findViewById(R.id.clear_task_button);
+            submitButton = (Button) v.findViewById(R.id.submit_task_button);
         }
     }
 
