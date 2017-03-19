@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">SomTasks</string>
-    <string name="title_activity_login">SomTasks CornershopApp</string>
+    <string name="app_name">SOM Tasks</string>
+    <string name="title_activity_login">SOM Tasks</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -15,6 +15,20 @@
         completions."
     </string>
 
+    <!-- Main activity string -->
+    <string name="welcome_toast">You\'re now signed in. Welcome back</string>
+    <string name="welcome_session">Hola,</string>
+    <string name="need_login_toast">You need to sign in. Welcome to SomTasks</string>
+
     <!-- menu -->
     <string name="menu_main_item_logout">Logout</string>
+
+    <!-- tasks -->
+    <string name="task_action_label">Action taken</string>
+    <string name="task_action_feedback_label">Feedback</string>
+    <string name="task_form_clear">Clear</string>
+    <string name="task_form_clear_content_description">Clear content button</string>
+    <string name="task_form_submit">Submit</string>
+    <string name="task_form_submit_content_description">Submit task button</string>
+
 </resources>

@@ -7,7 +7,10 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableLayout;
@@ -20,11 +23,11 @@ import java.util.List;
 
 public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHolder> {
 
-    private final List<FormItem> data;
+    private List<FormItem> data;
     private Context context;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
-    public FormListAdapter(final List<FormItem> data) {
+    public FormListAdapter(List<FormItem> data) {
         this.data = data;
         for (int i = 0; i < data.size(); i++) {
             expandState.append(i, false);
@@ -34,15 +37,18 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         this.context = parent.getContext();
-        return new ViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.action_form_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.action_form_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final FormItem item = data.get(position);
         holder.setIsRecyclable(false);
+
         holder.textView.setText(item.description);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.context, R.layout.options_spinner_item, item.options);
+        holder.spinnerOptions.setAdapter(adapter);
+
         holder.expandableLayout.setInRecyclerView(true);
         holder.expandableLayout.setInterpolator(item.interpolator);
         holder.expandableLayout.setExpanded(expandState.get(position));
@@ -87,17 +93,18 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public RelativeLayout buttonLayout;
-        /**
-         * You must use the ExpandableLinearLayout in the recycler view.
-         * The ExpandableRelativeLayout doesn't work.
-         */
+        public Spinner spinnerOptions;
+        public EditText editText;
+
         public ExpandableLinearLayout expandableLayout;
 
         public ViewHolder(View v) {
             super(v);
             textView = (TextView) v.findViewById(R.id.textView);
+            editText = (EditText) v.findViewById(R.id.formField);
             buttonLayout = (RelativeLayout) v.findViewById(R.id.button);
             expandableLayout = (ExpandableLinearLayout) v.findViewById(R.id.expandableLayout);
+            spinnerOptions = (Spinner) v.findViewById(R.id.spinner_options);
         }
     }
 

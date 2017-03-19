@@ -4,51 +4,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorControlHighlight"
     >
 
     <RelativeLayout
         android:id="@+id/button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentRight="true"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:gravity="center">
 
         <ImageView
             android:src="@mipmap/basket_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+
     </RelativeLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="72dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@id/button"
-        android:gravity="center"
+        android:layout_toStartOf="@id/button"
+        android:textColor="@android:color/black"
+        android:gravity="start"
         android:padding="8dp"
-        android:textSize="12sp"
-        />
+        android:textSize="14sp" />
 
     <com.github.aakira.expandablelayout.ExpandableLinearLayout
         android:id="@+id/expandableLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/textView"
         android:orientation="vertical"
         app:ael_duration="400"
         app:ael_expanded="false"
         >
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="sample.sample.sample.sample.sample.sample.sample\n"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            />
+            android:background="@android:color/white"
+            android:divider="@color/colorPrimaryDark"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_options"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="8dp">
+            </Spinner>
+
+            <EditText
+                android:id="@+id/formField"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:inputType="text"
+                android:hint="@string/task_action_feedback_label"
+                android:layout_width="match_parent"
+                android:layout_margin="8dp">
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorButton"
+                    android:text="@string/task_form_clear"
+                    android:contentDescription="@string/task_form_clear_content_description"/>
+
+                <Button
+                    android:gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorButton"
+                    android:text="@string/task_form_submit"
+                    android:contentDescription="@string/task_form_submit_content_description"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 </RelativeLayout>
