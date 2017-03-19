@@ -20,14 +20,8 @@ public interface ActionFieldColumns {
     @References(table = Tables.PENDING_TASKS, column = PendingTasksColumns._ID)
     String TASK_ID = "task_id";
 
-    @DataType(TEXT)
-    String FIELD_LABEL = "field_label";
-
     @DataType(INTEGER)
     String INDEX = "index";
-
-    @DataType(TEXT)
-    String INPUT_TYPE = "input_type";
 
     @DataType(INTEGER)
     String KEY_ID = "key_id";

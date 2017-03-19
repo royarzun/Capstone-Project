@@ -19,6 +19,9 @@
     <string name="welcome_toast">You\'re now signed in. Welcome back</string>
     <string name="welcome_session">Hola,</string>
     <string name="need_login_toast">You need to sign in. Welcome to SomTasks</string>
+    <string name="todo_tasks_title">your Tasks to be resolved are:</string>
+    <string name="todo_tasks_empty_view">You don\'t have tasks at the moment, go grab some coffee in the meantime</string>
+
 
     <!-- menu -->
     <string name="menu_main_item_logout">Logout</string>

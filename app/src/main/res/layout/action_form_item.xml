@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:id="@+id/button"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:gravity="center">
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="96dp"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/button"
         android:textColor="@android:color/black"
@@ -72,21 +72,23 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/submit_task_button"
+                    android:gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/task_form_submit"
+                    android:background="@color/colorButton"
+                    android:contentDescription="@string/task_form_clear_content_description"/>
+
+                <Button
+                    android:id="@+id/clear_task_button"
                     android:gravity="center"
                     android:layout_margin="16dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:background="@color/colorButton"
                     android:text="@string/task_form_clear"
-                    android:contentDescription="@string/task_form_clear_content_description"/>
-
-                <Button
-                    android:gravity="center"
-                    android:layout_margin="16dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:background="@color/colorButton"
-                    android:text="@string/task_form_submit"
                     android:contentDescription="@string/task_form_submit_content_description"/>
             </LinearLayout>
 
