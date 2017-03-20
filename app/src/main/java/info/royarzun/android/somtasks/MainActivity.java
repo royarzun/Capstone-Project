@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int RC_SIGN_IN = 200;
 
-    // Firebase instance variables
     private DatabaseReference mDatabase;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private String userUID;
     private List<FormItem> data = new ArrayList<>();
+    private String userUID;
 
+    @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.user_profile) TextView mUserProfileTV;
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
 
@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+
         try{
             mUserProfileTV.setText(getResources().getText(R.string.welcome_session) +
                     " " + mFirebaseAuth.getCurrentUser().getEmail() + ", "+ getResources().getText(R.string.todo_tasks_title) );

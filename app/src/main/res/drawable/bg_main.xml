@@ -2,11 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@android:color/white"/>
     <item
+        android:gravity="start"
         android:bottom="16dp"
         android:start="16dp">
         <bitmap
             android:src="@mipmap/logo_canasto_main"
-            android:gravity="bottom|left" />
+            android:gravity="bottom|start" />
     </item>
 
 </layer-list>
