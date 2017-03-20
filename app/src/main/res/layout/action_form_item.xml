@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorControlHighlight"
+    android:layoutDirection="locale"
     >
 
     <RelativeLayout
@@ -31,7 +32,8 @@
         android:textColor="@android:color/black"
         android:gravity="start"
         android:padding="8dp"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layoutDirection="locale" />
 
     <com.github.aakira.expandablelayout.ExpandableLinearLayout
         android:id="@+id/expandableLayout"
@@ -39,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textView"
         android:orientation="vertical"
+        android:layoutDirection="locale"
         app:ael_duration="400"
         app:ael_expanded="false"
         >
@@ -47,13 +50,15 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:divider="@color/colorPrimaryDark"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layoutDirection="locale">
 
             <Spinner
                 android:id="@+id/spinner_options"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:nextFocusDown="@+id/formField">
             </Spinner>
 
             <EditText
@@ -63,7 +68,8 @@
                 android:inputType="text"
                 android:hint="@string/task_action_feedback_label"
                 android:layout_width="match_parent"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:nextFocusDown="@+id/submit_task_button">
             </EditText>
 
             <LinearLayout
@@ -79,7 +85,8 @@
                     android:layout_width="wrap_content"
                     android:text="@string/task_form_submit"
                     android:background="@color/colorButton"
-                    android:contentDescription="@string/task_form_clear_content_description"/>
+                    android:contentDescription="@string/task_form_clear_content_description"
+                    android:nextFocusRight="@+id/clear_task_button"/>
 
                 <Button
                     android:id="@+id/clear_task_button"
